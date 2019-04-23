@@ -1,7 +1,6 @@
 from flask import Flask
 from selene import config, browser
 from selene.browsers import BrowserName
-from selene.driver import SeleneDriver
 from selenium import webdriver
 
 from myapplic.Tests.GoogleSite import GoogleSite
