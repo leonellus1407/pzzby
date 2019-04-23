@@ -6,4 +6,5 @@ lib64/
 share/
 venv/
 pyvenv.cfg
-myapplic/.idea/
+.idea/
+myapplic/MainPackage/geckodriver.log
