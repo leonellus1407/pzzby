@@ -1,5 +1,8 @@
 # This Python file uses the following encoding: utf-8
+import time
+import datetime
 
+import selenium
 from selene.api import *
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.expected_conditions import *
@@ -41,10 +44,24 @@ class GoogleSite:
         browser.open_url('https://pzz.by/')
         action_click_to_element(driver, driver.find_element_by_xpath(
             '//*[@class="show-preview" and contains(text(), "Опята и курица")]'))
+    #   Change pizza size
         action_click_to_element(driver, driver.find_element_by_xpath(
             '//*[@id="p_p_size_2"]'), '//*[@id="p_p_size_2"]')
+    #   Add pizza to cart
         action_click_to_element(driver, driver.find_element_by_xpath(
             '//*[@class="in-cart popup-in-cart "]'),'//*[@class="in-cart popup-in-cart "]')
+    #   Click to enter street
+        action_click_to_element(driver, driver.find_element_by_xpath(
+            '//*[@id="s2id_street-name"]'), '//*[@id="s2id_street-name"]')
+    #   Enter Pobeditelei street
+        start = time.time()
+        s(by.xpath('//*[@id="s2id_autogen1_search"]')).set('Победителей').press_tab()
+        prom = time.time()
+        time.sleep(4)
+    #   Enter House number
+        action_click_to_element(driver, driver.find_element_by_xpath(
+            '//*[@id="s2id_home-number"]'), '//*[@id="s2id_home-number"]')
+        s(by.xpath('//*[@id="s2id_autogen2_search"]')).send_keys('7').press_tab()
         # action_click_to_element(driver, driver.find_element_by_xpath(
         #    '//*[@id="p_p_size_1"]'))
         # s(by.xpath('//*[@class="in-cart popup-in-cart "]')).click()
