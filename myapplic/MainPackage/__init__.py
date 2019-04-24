@@ -10,13 +10,14 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    setup_browser()
-    return GoogleSite.run_test()
+    return GoogleSite.run_test(setup_browser())
 
 
 def setup_browser():
     driver = webdriver.Firefox()
     browser.set_driver(driver)
+    config.timeout = 2
+    return driver
 
 
 if __name__ == "__main__":

@@ -1,0 +1,43 @@
+#       step = 0
+#       my_log = 'Start logging<br>'
+#       step += 1
+#       my_log += str(step) + '. Opening http://google.com<br>'
+#       step += 1
+#       browser.open_url('http://google.com')
+#       my_log += str(step) + '. Entering in search field [pizza lisica]<br>'
+#       step += 1
+#       s("[name='q']").set('pizza licica cart').press_enter()
+#       my_log += str(step) + '. Go search<br>'
+#       step += 1
+#       WebDriverWait(driver, config.timeout).until(element_to_be_clickable((by.css(".g"))))
+#       try:
+#           s(by.xpath('//*[@class="iUh30" and contains(text(), "https://pzz.by")]')).click()
+#           #ss('.iUh30').filtered_by(have.exact_texts("https://www.pzz.by/","https://pzz.by/"))[0].click()
+#       except selenium.common.exceptions.TimeoutException:
+#           try:
+#               ss('.iUh30').filtered_by(have.exact_texts("https://www.pzz.by/","https://pzz.by/"))[0].scroll_to().click()
+#           except selenium.common.exceptions.TimeoutException:
+#               # DEBUG
+#               print(str(type(ss('iUh30'))))
+#               ret_str = "Size: " + str(ss('.iUh30').size()) + "<br>"
+#               #for i in ss('.iUh30'):
+#               for i in ss('.iUh30'):
+#                   ret_str += i.text + "<br>"
+#               ret_str += "<br><br>"
+#               ret_str += "Size: " + str(ss('.iUh30').filtered_by(have.exact_texts("https://www.pzz.by/","https://pzz.by/")).size()) + "<br>"
+#               #for i in ss('.iUh30'):
+#               for i in ss('.iUh30').filtered_by(have.exact_texts("https://www.pzz.by/","https://pzz.by/")):
+#                   ret_str += i.text + "<br>"
+#               return ret_str
+#               # DEBUG
+#               #return json.dumps(['{}{}'.format(i.text, "<br>") for i in ss('.iUh30')])
+#
+#        found = False
+#        while not found:
+#            scroll_nav_out_of_way = 'window.scrollBy(0, -120);'
+#            driver.execute_script(scroll_nav_out_of_way)
+#            if s('.iUh30').(have.exact_text("https://pzz.by/")).is_displayed():
+#
+#                found = True
+#       my_log += str(step) + '. Click to link [https://pzz.by/]<br>'
+#       step += 1
