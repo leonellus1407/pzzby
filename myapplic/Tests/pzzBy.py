@@ -18,9 +18,11 @@ class pzzBy:
         st_time = datetime.datetime.now()
         browser.open_url('https://pzz.by/')
         pzzBy._set_address(driver, 'Победителей', '1')  # Russian A
-        pzzBy._add_pizza_to_cart(driver, 'Гавайская', 2, 1600)
-        pzzBy._add_pizza_to_cart(driver, 'Грибная', 1, 1000)
-        pzzBy._add_pizza_to_cart(driver, 'Грибная', 2, 1000)
+        pzzBy._add_pizza_to_cart(driver, 'Гавайская', 2, 4)
+        pzzBy._remove_pizza_to_cart(driver, 'Гавайская', 2, 3)
+        pzzBy._add_pizza_to_cart(driver, 'Грибная', 1, 5)
+        pzzBy._remove_pizza_to_cart(driver, 'Грибная', 1, 2)
+        pzzBy._add_pizza_to_cart(driver, 'Грибная', 2, 2)
         pzzBy._checkout(driver)
         return "Duration: " + str((datetime.datetime.now() - st_time).seconds) + " seconds"
 
@@ -53,9 +55,10 @@ class pzzBy:
                 '//*[@id="p_p_size_1"]'), '//*[@id="p_p_size_1"]')
         #   Add pizza to cart
         element = driver.find_element_by_xpath('//*[@id="myModal"]//span[@class="plus-item"]')
+        el = s(by.xpath('//*[@id="myModal"]//span[@class="plus-item"]'))
         i = 1
         while i <= num:
-            if s(element).is_displayed():
+            if el.is_displayed():
                 c_actions.action_click_to_element(driver, element, '//*[@id="myModal"]//span[@class="plus-item"]')
             else:
                 try:
@@ -89,3 +92,36 @@ class pzzBy:
                                           )
 
         # //h1[contains(text(), "Заказ принят")] XPATH For order complete
+
+    @staticmethod
+    def _remove_pizza_to_cart(driver, pizza_name, size=2, num=1):
+        #   Open pizza
+        c_actions.action_click_to_element(driver, driver.find_element_by_xpath(
+            '//*[@class="show-preview" and contains(text(), "' + pizza_name + '")]'))
+        #   Change pizza size
+        if size == 2:
+            c_actions.action_click_to_element(driver, driver.find_element_by_xpath(
+                '//*[@id="p_p_size_2"]'), '//*[@id="p_p_size_2"]')
+        else:
+            c_actions.action_click_to_element(driver, driver.find_element_by_xpath(
+                '//*[@id="p_p_size_1"]'), '//*[@id="p_p_size_1"]')
+        #   Add pizza to cart
+        element = driver.find_element_by_xpath('//*[@id="myModal"]//span[@class="minus-item"]')
+        el = s(by.xpath('//*[@id="myModal"]//span[@class="plus-item"]'))
+        i = 1
+        while i <= num:
+            if el.is_displayed():
+                c_actions.action_click_to_element(driver, element, '//*[@id="myModal"]//span[@class="minus-item"]')
+            else:
+                try:
+                    c_actions.action_click_to_element(driver, driver.find_element_by_xpath(
+                        '//*[@class="in-cart popup-in-cart"]'), '//*[@class="in-cart popup-in-cart"]')
+                except NoSuchElementException:
+                    c_actions.action_click_to_element(driver, driver.find_element_by_xpath(
+                        '//*[@class="in-cart popup-in-cart "]'), '//*[@class="in-cart popup-in-cart "]')
+            i += 1
+        #   Close pizza
+        c_actions.action_click_to_element(driver, driver.find_element_by_xpath(
+            '//*[@id="myModal"]//span[contains(text(),"Закрыть")]'),
+                                          '//*[@id="myModal"]//span[contains(text(),"Закрыть")]')
+        c_actions.custom_pause()

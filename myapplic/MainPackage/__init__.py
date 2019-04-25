@@ -22,5 +22,5 @@ def setup_browser():
 
 if __name__ == "__main__":
     config.browser_name = BrowserName.FIREFOX
-    app.debug = True
+    app.debug = False
     app.run(host='0.0.0.0')
