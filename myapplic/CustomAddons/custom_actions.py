@@ -2,9 +2,10 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.support.expected_conditions import *
 from selenium.webdriver.support.wait import WebDriverWait
 from selene.api import *
+import time
 
 
-class moving:
+class c_actions:
 
     @staticmethod
     def scroll_shim(passed_in_driver, object):
@@ -21,7 +22,7 @@ class moving:
     @staticmethod
     def action_click_to_element(driver, element, xpath=None):
         action_chains = ActionChains(driver)
-        moving.scroll_shim(driver, element)
+        c_actions.scroll_shim(driver, element)
         if xpath is not None:
             WebDriverWait(
                 driver, config.timeout).until(
@@ -29,3 +30,7 @@ class moving:
                         by.xpath(
                             xpath)))
         action_chains.move_to_element(element).click().perform()
+
+    @staticmethod
+    def custom_pause(ctime=1):
+        time.sleep(ctime)

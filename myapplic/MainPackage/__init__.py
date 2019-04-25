@@ -3,7 +3,7 @@ from selene import config, browser
 from selene.browsers import BrowserName
 from selenium import webdriver
 
-from myapplic.Tests.GoogleSite import pzzBy
+from myapplic.Tests.pzzBy import pzzBy
 
 app = Flask(__name__)
 
