@@ -1,3 +1,5 @@
+from selene.browsers import BrowserName
+from selenium import webdriver
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.expected_conditions import *
 from selenium.webdriver.support.wait import WebDriverWait

@@ -13,6 +13,7 @@ idna==2.8
 itsdangerous==1.1.0
 Jinja2==2.10.1
 MarkupSafe==1.1.1
+pkg-resources==0.0.0
 requests==2.21.0
 selene==1.0.0a13
 selenium==4.0.0a1

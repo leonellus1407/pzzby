@@ -2,6 +2,8 @@
 import datetime
 import selenium
 from selene.api import *
+from selene.browsers import BrowserName
+from selenium import webdriver
 from selenium.common.exceptions import *
 
 from myapplic.CustomAddons.custom_actions import c_actions
@@ -9,25 +11,31 @@ from myapplic.CustomAddons.custom_actions import c_actions
 
 class pzzBy:
 
-    @staticmethod
-    def __init__():
+    def __init__(self):
+        # self.driver = self._setup_browser()
         pass
 
-    @staticmethod
-    def run_test(driver):
-        st_time = datetime.datetime.now()
-        browser.open_url('https://pzz.by/')
-        pzzBy._set_address(driver, 'Победителей', '1')  # Russian A
-        pzzBy._add_pizza_to_cart(driver, 'Гавайская', 2, 4)
-        pzzBy._remove_pizza_to_cart(driver, 'Гавайская', 2, 3)
-        pzzBy._add_pizza_to_cart(driver, 'Грибная', 1, 5)
-        pzzBy._remove_pizza_to_cart(driver, 'Грибная', 1, 2)
-        pzzBy._add_pizza_to_cart(driver, 'Грибная', 2, 2)
-        pzzBy._checkout(driver)
-        return "Duration: " + str((datetime.datetime.now() - st_time).seconds) + " seconds"
+    # METHOD REWRITE UNDER REQUIREMENTS OF BEHAVE
+    def _setup_browser(self):
+        config.browser_name = BrowserName.FIREFOX
+        driver = webdriver.Firefox()
+        browser.set_driver(driver)
+        config.timeout = 5
+        return driver
 
-    @staticmethod
-    def _set_address(driver, street, house):
+    # def run_test(driver):
+    #     st_time = datetime.datetime.now()
+    #     browser.open_url('https://pzz.by/')
+    #     pzzBy._set_address(driver, 'Победителей', '1')  # Russian A
+    #     pzzBy._add_pizza_to_cart(driver, 'Гавайская', 2, 4)
+    #     pzzBy._remove_pizza_to_cart(driver, 'Гавайская', 2, 3)
+    #     pzzBy._add_pizza_to_cart(driver, 'Грибная', 1, 5)
+    #     pzzBy._remove_pizza_to_cart(driver, 'Грибная', 1, 2)
+    #     pzzBy._add_pizza_to_cart(driver, 'Грибная', 2, 2)
+    #     pzzBy._checkout(driver)
+    #     return "Duration: " + str((datetime.datetime.now() - st_time).seconds) + " seconds"
+
+    def set_address(self, driver, street, house):
         c_actions.action_click_to_element(driver, driver.find_elements_by_xpath(
             '//*[@class ="pzz-cart__delivery pizza-sending"]/a')[1])
         c_actions.action_click_to_element(driver, driver.find_element_by_xpath(
@@ -41,8 +49,7 @@ class pzzBy:
             '//*[@id="byaddress"]'))
         c_actions.custom_pause()
 
-    @staticmethod
-    def _add_pizza_to_cart(driver, pizza_name, size=2, num=1):
+    def add_pizza_to_cart(self, driver, pizza_name, size=2, num=1):
         #   Open pizza
         c_actions.action_click_to_element(driver, driver.find_element_by_xpath(
             '//*[@class="show-preview" and contains(text(), "' + pizza_name + '")]'))
@@ -74,8 +81,7 @@ class pzzBy:
                                           '//*[@id="myModal"]//span[contains(text(),"Закрыть")]')
         c_actions.custom_pause()
 
-    @staticmethod
-    def _checkout(driver):
+    def checkout(self, driver):
         try:
             ss(by.xpath('//a[contains(text(),"корзина")]'))[0].click()
         except selenium.common.exceptions.ElementClickInterceptedException:
@@ -93,8 +99,7 @@ class pzzBy:
 
         # //h1[contains(text(), "Заказ принят")] XPATH For order complete
 
-    @staticmethod
-    def _remove_pizza_to_cart(driver, pizza_name, size=2, num=1):
+    def remove_pizza_to_cart(self, driver, pizza_name, size=2, num=1):
         #   Open pizza
         c_actions.action_click_to_element(driver, driver.find_element_by_xpath(
             '//*[@class="show-preview" and contains(text(), "' + pizza_name + '")]'))

@@ -13,13 +13,6 @@ def hello():
     return pzzBy.run_test(setup_browser())
 
 
-def setup_browser():
-    driver = webdriver.Firefox()
-    browser.set_driver(driver)
-    config.timeout = 5
-    return driver
-
-
 if __name__ == "__main__":
     config.browser_name = BrowserName.FIREFOX
     app.debug = False
