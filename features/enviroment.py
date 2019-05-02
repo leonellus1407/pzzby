@@ -1,16 +1,7 @@
 # -- FILE: features/environment.py
 # CONTAINS: Browser fixture setup and teardown
-from behave import fixture, use_fixture
+from behave import fixture
 from selenium.webdriver import Firefox
-import behave_webdriver
-from selene import config, browser
-from behave.log_capture import capture
-from selenium import webdriver
-
-from features.Browser import Browser
-from myapplic.Tests.pzzBy import pzzBy
-from selene.browsers import BrowserName
-from behave.model import Scenario
 
 
 @fixture

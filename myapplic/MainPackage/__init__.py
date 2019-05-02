@@ -1,7 +1,6 @@
 from flask import Flask
-from selene import config, browser
+from selene import config
 from selene.browsers import BrowserName
-from selenium import webdriver
 
 from myapplic.Tests.pzzBy import pzzBy
 

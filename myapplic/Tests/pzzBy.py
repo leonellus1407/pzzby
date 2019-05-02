@@ -1,5 +1,4 @@
 # This Python file uses the following encoding: utf-8
-import datetime
 import selenium
 from selene.api import *
 from selene.browsers import BrowserName
