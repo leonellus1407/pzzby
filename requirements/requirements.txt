@@ -29,5 +29,5 @@ selenium==4.0.0a1
 six==1.12.0
 urllib3==1.24.1
 webdriver-manager==1.7
-Werkzeug==0.15.2
+Werkzeug==0.15.3
 yarg==0.1.9
